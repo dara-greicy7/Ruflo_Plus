@@ -1,0 +1,65 @@
+{
+  "extensions": {
+    "checkpointing": {
+      "enabled": true,
+      "storage_path": "./data/checkpoints",
+      "cleanup_completed_after_hours": 24,
+      "comment": "LangGraph-style durable execution — survives crashes by checkpointing every tool call"
+    },
+    "human_in_the_loop": {
+      "enabled": true,
+      "storage_path": "./data/approvals",
+      "approval_required_tools": [
+        "ruflo__terminal_execute",
+        "ruflo__agent_spawn",
+        "ruflo__swarm_init",
+        "ruflo__workflow_execute"
+      ],
+      "approval_patterns": [],
+      "approval_timeout_seconds": 300,
+      "auto_approve_non_matching": true,
+      "comment": "LangGraph-style human-in-the-loop — intercepts configured tools and blocks until a human approves or rejects"
+    },
+    "tracing": {
+      "enabled": true,
+      "storage_path": "./data/traces",
+      "log_args": true,
+      "log_results": true,
+      "max_arg_length": 300,
+      "max_result_length": 500,
+      "recent_limit": 50,
+      "comment": "LangGraph-style execution tracing — structured JSONL audit trail for every tool call"
+    },
+    "skill_feedback": {
+      "enabled": true,
+      "storage_path": "./data/feedback",
+      "window_size": 50,
+      "promotion_threshold": 0.80,
+      "demotion_threshold": 0.30,
+      "comment": "OpenSpace-style AUTO-IMPROVE — tracks success/failure rates per tool, flags low-performers, promotes high-confidence tools"
+    },
+    "cost_tracker": {
+      "enabled": true,
+      "storage_path": "./data/costs",
+      "budget_limit_usd": 10.00,
+      "warn_at_percent": 80,
+      "block_on_budget_exceeded": false,
+      "pricing": {
+        "claude-3-5-sonnet-20241022": { "input_per_mtok": 3.00, "output_per_mtok": 15.00 },
+        "claude-3-5-haiku-20241022":  { "input_per_mtok": 0.80, "output_per_mtok": 4.00 },
+        "claude-3-opus-20240229":     { "input_per_mtok": 15.00, "output_per_mtok": 75.00 },
+        "claude-sonnet-4-6":          { "input_per_mtok": 3.00, "output_per_mtok": 15.00 },
+        "claude-haiku-4-5":           { "input_per_mtok": 0.80, "output_per_mtok": 4.00 },
+        "gpt-4o":                     { "input_per_mtok": 2.50, "output_per_mtok": 10.00 },
+        "gpt-4o-mini":                { "input_per_mtok": 0.15, "output_per_mtok": 0.60 },
+        "gpt-4.1":                    { "input_per_mtok": 2.00, "output_per_mtok": 8.00 },
+        "gpt-4.1-mini":               { "input_per_mtok": 0.40, "output_per_mtok": 1.60 },
+        "gemini-2.5-pro":             { "input_per_mtok": 1.25, "output_per_mtok": 10.00 },
+        "gemini-2.5-flash":           { "input_per_mtok": 0.15, "output_per_mtok": 0.60 },
+        "o3-mini":                    { "input_per_mtok": 1.10, "output_per_mtok": 4.40 },
+        "default":                    { "input_per_mtok": 3.00, "output_per_mtok": 15.00 }
+      },
+      "comment": "OpenSpace-style token/cost governance — tracks cumulative spend, warns at threshold, blocks if budget exceeded"
+    }
+  }
+}
