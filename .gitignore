@@ -1,0 +1,21 @@
+# Dependencies
+node_modules/
+
+# Build output
+v3/@claude-flow/cli/dist/
+dist/
+
+# Runtime / daemon state
+.claude-flow/
+
+# Environment & secrets
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store

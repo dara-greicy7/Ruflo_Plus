@@ -43,7 +43,7 @@
     "dev": "tsx watch src/index.ts",
     "build": "tsc",
     "build:ts": "cd v3/@claude-flow/cli && npm run build || true",
-    "prepublishOnly": "cd v3/@claude-flow/cli && npm install --ignore-scripts && npx tsc",
+    "prepublishOnly": "cd v3/@claude-flow/cli && tsc",
     "test": "vitest",
     "test:ui": "vitest --ui",
     "test:security": "vitest run v3/__tests__/security/",
